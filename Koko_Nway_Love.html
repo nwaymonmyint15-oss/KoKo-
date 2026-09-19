@@ -1,0 +1,1628 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>For Koko ❤️</title>
+
+<style>
+
+/* =========================
+   BASIC
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+
+    width: 100%;
+    height: 100vh;
+
+    overflow: hidden;
+
+    background:
+    radial-gradient(
+        circle at center,
+        #330018,
+        #100008 45%,
+        #000000
+    );
+
+    color: white;
+
+    font-family:
+    "Segoe UI",
+    Arial,
+    sans-serif;
+}
+
+
+/* =========================
+   STAR CANVAS
+========================= */
+
+#stars {
+
+    position: fixed;
+
+    left: 0;
+    top: 0;
+
+    width: 100%;
+    height: 100%;
+
+    z-index: 0;
+}
+
+
+/* =========================
+   OPENING SCREEN
+========================= */
+
+#opening {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 20;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    text-align: center;
+
+    background:
+    radial-gradient(
+        circle,
+        #35001c,
+        #080006 70%
+    );
+
+    transition:
+    opacity 1.5s ease,
+    visibility 1.5s ease;
+}
+
+
+.opening-content {
+
+    animation:
+    openingFloat 3s
+    ease-in-out
+    infinite;
+}
+
+
+@keyframes openingFloat {
+
+    0%,100% {
+
+        transform:
+        translateY(0);
+
+    }
+
+    50% {
+
+        transform:
+        translateY(-10px);
+
+    }
+
+}
+
+
+.opening-heart {
+
+    font-size: 80px;
+
+    margin-bottom: 20px;
+
+    animation:
+    heartBeat 1.2s
+    infinite;
+
+    filter:
+    drop-shadow(
+        0 0 15px #ff3377
+    );
+}
+
+
+@keyframes heartBeat {
+
+    0%,100% {
+
+        transform:
+        scale(1);
+
+    }
+
+    50% {
+
+        transform:
+        scale(1.2);
+
+    }
+
+}
+
+
+.opening-title {
+
+    font-size:
+    clamp(38px, 9vw, 70px);
+
+    color: #ff76a8;
+
+    text-shadow:
+    0 0 10px #ff3377,
+    0 0 30px #ff0066;
+
+    margin-bottom: 15px;
+}
+
+
+.opening-subtitle {
+
+    color:
+    rgba(255,255,255,.7);
+
+    font-size:
+    clamp(14px, 3vw, 18px);
+
+    margin-bottom: 35px;
+}
+
+
+/* =========================
+   OPEN BUTTON
+========================= */
+
+#openButton {
+
+    padding:
+    15px 32px;
+
+    border: 1px solid #ff4f91;
+
+    border-radius: 40px;
+
+    background:
+    linear-gradient(
+        135deg,
+        #ff3377,
+        #b5004d
+    );
+
+    color: white;
+
+    font-size: 17px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    box-shadow:
+    0 0 15px #ff3377,
+    0 0 35px
+    rgba(255,0,100,.4);
+
+    transition:
+    transform .3s,
+    box-shadow .3s;
+}
+
+
+#openButton:hover {
+
+    transform:
+    scale(1.08);
+
+    box-shadow:
+    0 0 20px #ff3377,
+    0 0 50px
+    rgba(255,0,100,.6);
+}
+
+
+/* =========================
+   MAIN WEBSITE
+========================= */
+
+#main {
+
+    position: relative;
+
+    width: 100%;
+    height: 100vh;
+
+    z-index: 2;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    transition:
+    opacity 2s ease;
+}
+
+
+#main.show {
+
+    opacity: 1;
+
+    pointer-events: auto;
+}
+
+
+/* =========================
+   SVG HEART
+========================= */
+
+svg {
+
+    width:
+    min(90vw, 650px);
+
+    height:
+    min(65vh, 550px);
+
+    overflow: visible;
+}
+
+
+.heart-outline {
+
+    fill: none;
+
+    stroke: #ff4f91;
+
+    stroke-width: 4;
+
+    filter:
+    drop-shadow(
+        0 0 5px #ff4f91
+    )
+    drop-shadow(
+        0 0 20px #ff0066
+    );
+
+    animation:
+    heartPulse 1.2s
+    infinite;
+}
+
+
+@keyframes heartPulse {
+
+    0%,100% {
+
+        transform:
+        scale(1);
+
+        transform-origin:
+        center;
+
+    }
+
+    50% {
+
+        transform:
+        scale(1.04);
+
+        transform-origin:
+        center;
+    }
+}
+
+
+/* =========================
+   HEART WORDS
+========================= */
+
+.heart-word {
+
+    fill: #ff9cbd;
+
+    font-size: 15px;
+
+    font-weight: bold;
+
+    text-anchor: middle;
+
+    opacity: 0;
+
+    filter:
+    drop-shadow(
+        0 0 5px #ff3377
+    );
+
+    animation:
+    appear 1s forwards;
+}
+
+
+@keyframes appear {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+        translateY(10px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+        translateY(0);
+
+    }
+}
+
+
+/* =========================
+   CENTER HEART
+========================= */
+
+.center-heart {
+
+    font-size: 75px;
+
+    animation:
+    centerBeat 1s infinite;
+
+    transform-origin:
+    center;
+
+    filter:
+    drop-shadow(
+        0 0 10px #ff3377
+    )
+    drop-shadow(
+        0 0 25px #ff0066
+    );
+}
+
+
+@keyframes centerBeat {
+
+    0%,100% {
+
+        transform:
+        scale(1);
+
+    }
+
+    50% {
+
+        transform:
+        scale(1.2);
+
+    }
+}
+
+
+/* =========================
+   LOVE LETTER
+========================= */
+
+#letter {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 15;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    padding: 25px;
+
+    background:
+    rgba(5,0,8,.94);
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    transition:
+    opacity 2s ease;
+}
+
+
+#letter.show {
+
+    opacity: 1;
+
+    pointer-events: auto;
+}
+
+
+.letter-box {
+
+    width:
+    min(90vw, 650px);
+
+    max-height: 80vh;
+
+    overflow-y: auto;
+
+    padding:
+    35px 30px;
+
+    border:
+    1px solid
+    rgba(255,80,140,.4);
+
+    border-radius: 25px;
+
+    background:
+    rgba(50,0,25,.55);
+
+    backdrop-filter:
+    blur(15px);
+
+    box-shadow:
+    0 0 30px
+    rgba(255,0,100,.2);
+
+    text-align: center;
+}
+
+
+.letter-title {
+
+    color: #ff75a7;
+
+    font-size:
+    clamp(28px, 7vw, 42px);
+
+    margin-bottom: 25px;
+
+    text-shadow:
+    0 0 15px #ff3377;
+}
+
+
+#letterText {
+
+    color:
+    rgba(255,255,255,.9);
+
+    font-size:
+    clamp(15px, 3.5vw, 18px);
+
+    line-height: 2;
+
+    white-space: pre-line;
+
+    text-align: left;
+}
+
+
+.final-love {
+
+    margin-top: 30px;
+
+    color: #ff75a7;
+
+    font-size:
+    clamp(25px, 6vw, 38px);
+
+    font-weight: bold;
+
+    text-align: center;
+
+    opacity: 0;
+
+    animation:
+    finalAppear 2s
+    forwards;
+
+    animation-delay: 1s;
+
+}
+
+
+@keyframes finalAppear {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+        translateY(15px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+        translateY(0);
+
+    }
+}
+
+
+/* =========================
+   MUSIC BUTTON
+========================= */
+
+#musicButton {
+
+    position: fixed;
+
+    top: 20px;
+
+    right: 20px;
+
+    z-index: 30;
+
+    padding:
+    10px 16px;
+
+    border:
+    1px solid #ff4f91;
+
+    border-radius: 30px;
+
+    background:
+    rgba(255,0,100,.15);
+
+    color: white;
+
+    cursor: pointer;
+
+    backdrop-filter:
+    blur(10px);
+}
+
+
+/* =========================
+   FLOATING HEARTS
+========================= */
+
+.floating-heart {
+
+    position: fixed;
+
+    z-index: 50;
+
+    pointer-events: none;
+
+    font-size: 25px;
+
+    animation:
+    floatHeart 2s
+    ease-out forwards;
+}
+
+
+@keyframes floatHeart {
+
+    0% {
+
+        opacity: 1;
+
+        transform:
+        translate(-50%,-50%)
+        scale(.5);
+
+    }
+
+    100% {
+
+        opacity: 0;
+
+        transform:
+        translate(
+            calc(-50% + var(--x)),
+            calc(-50% - 180px)
+        )
+        scale(1.5)
+        rotate(var(--rotate));
+    }
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     STAR BACKGROUND
+========================= -->
+
+<canvas id="stars"></canvas>
+
+
+
+<!-- =========================
+     OPENING SCREEN
+========================= -->
+
+<section id="opening">
+
+    <div class="opening-content">
+
+        <div class="opening-heart">
+            ❤️
+        </div>
+
+        <h1 class="opening-title">
+            For Koko ❤️
+        </h1>
+
+        <p class="opening-subtitle">
+            I made something special for you...
+        </p>
+
+        <button id="openButton">
+            Open My Heart 💗
+        </button>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     MAIN HEART
+========================= -->
+
+<section id="main">
+
+
+    <button id="musicButton">
+        🎵 Music OFF
+    </button>
+
+
+    <svg viewBox="0 0 800 700">
+
+
+        <defs>
+
+            <path
+                id="heartPath"
+
+                d="
+                M400 620
+
+                C400 620
+                150 470
+                150 280
+
+                C150 150
+                300 110
+                400 250
+
+                C500 110
+                650 150
+                650 280
+
+                C650 470
+                400 620
+                400 620
+
+                Z
+                "
+            />
+
+        </defs>
+
+
+        <!-- HEART -->
+
+        <use
+            href="#heartPath"
+            class="heart-outline"
+        />
+
+
+
+        <!-- WORDS -->
+
+        <g font-family="Arial">
+
+
+            <text
+                x="400"
+                y="200"
+                class="heart-word"
+                style="animation-delay:.2s">
+
+                Koko ❤️ Nway
+
+            </text>
+
+
+            <text
+                x="315"
+                y="225"
+                class="heart-word"
+                style="animation-delay:.4s">
+
+                Koko ❤️ Nway
+
+            </text>
+
+
+            <text
+                x="485"
+                y="225"
+                class="heart-word"
+                style="animation-delay:.6s">
+
+                Koko ❤️ Nway
+
+            </text>
+
+
+            <text
+                x="260"
+                y="270"
+                class="heart-word"
+                style="animation-delay:.8s">
+
+                Koko ❤️ Nway
+
+            </text>
+
+
+            <text
+                x="540"
+                y="270"
+                class="heart-word"
+                style="animation-delay:1s">
+
+                Koko ❤️ Nway
+
+            </text>
+
+
+            <text
+                x="225"
+                y="320"
+                class="heart-word"
+                style="animation-delay:1.2s">
+
+                Koko ❤️ Nway
+
+            </text>
+
+
+            <text
+                x="575"
+                y="320"
+                class="heart-word"
+                style="animation-delay:1.4s">
+
+                Koko ❤️ Nway
+
+            </text>
+
+
+            <text
+                x="225"
+                y="370"
+                class="heart-word"
+                style="animation-delay:1.6s">
+
+                Koko ❤️ Nway
+
+            </text>
+
+
+            <text
+                x="575"
+                y="370"
+                class="heart-word"
+                style="animation-delay:1.8s">
+
+                Koko ❤️ Nway
+
+            </text>
+
+
+            <text
+                x="250"
+                y="420"
+                class="heart-word"
+                style="animation-delay:2s">
+
+                Koko ❤️ Nway
+
+            </text>
+
+
+            <text
+                x="550"
+                y="420"
+                class="heart-word"
+                style="animation-delay:2.2s">
+
+                Koko ❤️ Nway
+
+            </text>
+
+
+            <text
+                x="290"
+                y="470"
+                class="heart-word"
+                style="animation-delay:2.4s">
+
+                Koko ❤️ Nway
+
+            </text>
+
+
+            <text
+                x="510"
+                y="470"
+                class="heart-word"
+                style="animation-delay:2.6s">
+
+                Koko ❤️ Nway
+
+            </text>
+
+
+            <text
+                x="340"
+                y="520"
+                class="heart-word"
+                style="animation-delay:2.8s">
+
+                Koko ❤️ Nway
+
+            </text>
+
+
+            <text
+                x="460"
+                y="520"
+                class="heart-word"
+                style="animation-delay:3s">
+
+                Koko ❤️ Nway
+
+            </text>
+
+
+            <text
+                x="400"
+                y="555"
+                class="heart-word"
+                style="animation-delay:3.2s">
+
+                Koko ❤️ Nway
+
+            </text>
+
+        </g>
+
+
+
+        <!-- CENTER HEART -->
+
+        <text
+            x="400"
+            y="390"
+            text-anchor="middle"
+            class="center-heart">
+
+            ❤️
+
+        </text>
+
+
+    </svg>
+
+
+</section>
+
+
+
+<!-- =========================
+     LOVE LETTER
+========================= -->
+
+<section id="letter">
+
+    <div class="letter-box">
+
+
+        <h2 class="letter-title">
+            For My Koko ❤️
+        </h2>
+
+
+        <div id="letterText"></div>
+
+
+        <div class="final-love">
+
+            I Love You, Koko ❤️
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<script>
+
+
+/* =========================================
+   STARS
+========================================= */
+
+const canvas =
+document.getElementById("stars");
+
+const ctx =
+canvas.getContext("2d");
+
+
+let stars = [];
+
+
+function resizeCanvas() {
+
+    canvas.width =
+    window.innerWidth;
+
+    canvas.height =
+    window.innerHeight;
+}
+
+
+resizeCanvas();
+
+
+window.addEventListener(
+    "resize",
+    resizeCanvas
+);
+
+
+for (
+    let i = 0;
+    i < 120;
+    i++
+) {
+
+    stars.push({
+
+        x:
+        Math.random()
+        * window.innerWidth,
+
+        y:
+        Math.random()
+        * window.innerHeight,
+
+        size:
+        Math.random()
+        * 2 + 1,
+
+        speed:
+        Math.random()
+        * 1.5 + .3,
+
+        opacity:
+        Math.random()
+
+    });
+
+}
+
+
+function drawStars() {
+
+    ctx.clearRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+
+
+    stars.forEach(
+        star => {
+
+            ctx.beginPath();
+
+
+            ctx.arc(
+                star.x,
+                star.y,
+                star.size,
+                0,
+                Math.PI * 2
+            );
+
+
+            ctx.fillStyle =
+            `rgba(
+                255,
+                255,
+                255,
+                ${star.opacity}
+            )`;
+
+
+            ctx.fill();
+
+
+            star.y +=
+            star.speed;
+
+
+            if (
+                star.y >
+                canvas.height
+            ) {
+
+                star.y = -10;
+
+                star.x =
+                Math.random()
+                * canvas.width;
+
+            }
+
+        }
+    );
+
+
+    requestAnimationFrame(
+        drawStars
+    );
+
+}
+
+
+drawStars();
+
+
+
+/* =========================================
+   OPEN MY HEART
+========================================= */
+
+const opening =
+document.getElementById(
+    "opening"
+);
+
+
+const main =
+document.getElementById(
+    "main"
+);
+
+
+const openButton =
+document.getElementById(
+    "openButton"
+);
+
+
+openButton.addEventListener(
+    "click",
+    function() {
+
+
+        opening.style.opacity =
+        "0";
+
+
+        opening.style.visibility =
+        "hidden";
+
+
+        main.classList.add(
+            "show"
+        );
+
+
+        /* Start music */
+
+        startMusic();
+
+
+        /* Show letter later */
+
+        setTimeout(
+            showLetter,
+            7500
+        );
+
+    }
+);
+
+
+
+/* =========================================
+   LOVE LETTER
+========================================= */
+
+
+/*
+   ဒီစာပိုဒ်ကို ကိုယ်ရေးချင်တဲ့
+   Love Letter နဲ့ ပြောင်းနိုင်ပါတယ်။
+*/
+
+const loveLetter =
+
+`Koko ရေ ❤️
+
+ဒီစာလေးကို ကိုကို့အတွက်
+သီးသန့်ရေးထားတာပါ။
+
+တစ်ခါတလေ ကိုကို့ကို
+ဘယ်လောက်ချစ်တယ်ဆိုတာ
+စကားလုံးတွေနဲ့ ပြောဖို့ခက်တယ်။
+
+ဒါပေမယ့် ကိုကိုသိစေချင်တာက
+Nway အတွက် ကိုကိုက
+တကယ်ကို အရေးကြီးတဲ့သူတစ်ယောက်ပါ။
+
+ကိုကိုနဲ့ စကားပြောရတဲ့အချိန်တွေ၊
+ရယ်မောရတဲ့အချိန်တွေ၊
+တစ်ယောက်နဲ့တစ်ယောက်
+ဂရုစိုက်ပေးတဲ့အချိန်တွေကို
+Nway တန်ဖိုးထားပါတယ်။
+
+ကိုကိုဘယ်လောက်အလုပ်များနေပါစေ
+ကိုယ့်ကိုယ်ကို ဂရုစိုက်ပါနော်။
+
+ပင်ပန်းရင်လည်း နားပါ။
+အိပ်ရေးဝအောင်အိပ်ပါ။
+ပြီးတော့ အမြဲပြုံးနေပါ။
+
+Nway က ကိုကို့ကို
+အမြဲတမ်း အားပေးနေမယ့်သူပါ။
+
+ဒီ website လေးက
+ကိုကို့အတွက် Nway ရဲ့
+သေးသေးလေးသော surprise တစ်ခုပါ။
+
+I hope this little heart
+can make you smile today. ❤️`;
+
+
+const letterText =
+document.getElementById(
+    "letterText"
+);
+
+
+const letter =
+document.getElementById(
+    "letter"
+);
+
+
+function showLetter() {
+
+    letter.classList.add(
+        "show"
+    );
+
+
+    let i = 0;
+
+
+    function typeLetter() {
+
+        if (
+            i <
+            loveLetter.length
+        ) {
+
+            letterText.textContent +=
+            loveLetter.charAt(i);
+
+            i++;
+
+
+            setTimeout(
+                typeLetter,
+                35
+            );
+
+        }
+
+    }
+
+
+    typeLetter();
+
+}
+
+
+
+/* =========================================
+   CLICK HEARTS
+========================================= */
+
+document.addEventListener(
+    "click",
+    function(event) {
+
+
+        if (
+            event.target.id ===
+            "openButton" ||
+
+            event.target.id ===
+            "musicButton"
+        ) {
+
+            return;
+
+        }
+
+
+        for (
+            let i = 0;
+            i < 7;
+            i++
+        ) {
+
+
+            const heart =
+            document.createElement(
+                "div"
+            );
+
+
+            heart.className =
+            "floating-heart";
+
+
+            const emojis = [
+                "❤️",
+                "💕",
+                "💗",
+                "💖",
+                "💘"
+            ];
+
+
+            heart.textContent =
+            emojis[
+                Math.floor(
+                    Math.random()
+                    * emojis.length
+                )
+            ];
+
+
+            heart.style.left =
+            event.clientX + "px";
+
+
+            heart.style.top =
+            event.clientY + "px";
+
+
+            heart.style.setProperty(
+                "--x",
+                (
+                    Math.random()
+                    * 180 - 90
+                ) + "px"
+            );
+
+
+            heart.style.setProperty(
+                "--rotate",
+                (
+                    Math.random()
+                    * 80 - 40
+                ) + "deg"
+            );
+
+
+            document.body.appendChild(
+                heart
+            );
+
+
+            setTimeout(
+                () => {
+                    heart.remove();
+                },
+                2500
+            );
+
+        }
+
+    }
+);
+
+
+
+/* =========================================
+   MUSIC
+========================================= */
+
+let audioContext = null;
+
+let musicPlaying = false;
+
+let musicTimer = null;
+
+
+const notes = [
+
+    261.63,
+    329.63,
+    392.00,
+    329.63,
+
+    293.66,
+    349.23,
+    440.00,
+    349.23,
+
+    261.63,
+    329.63,
+    392.00,
+    523.25
+
+];
+
+
+function playNote(
+    frequency,
+    duration
+) {
+
+
+    if (!audioContext)
+        return;
+
+
+    const oscillator =
+    audioContext
+    .createOscillator();
+
+
+    const gain =
+    audioContext
+    .createGain();
+
+
+    oscillator.type =
+    "sine";
+
+
+    oscillator.frequency.value =
+    frequency;
+
+
+    gain.gain.setValueAtTime(
+        0.0001,
+        audioContext.currentTime
+    );
+
+
+    gain.gain
+    .exponentialRampToValueAtTime(
+        0.08,
+        audioContext.currentTime
+        + .03
+    );
+
+
+    gain.gain
+    .exponentialRampToValueAtTime(
+        0.0001,
+        audioContext.currentTime
+        + duration
+    );
+
+
+    oscillator.connect(
+        gain
+    );
+
+
+    gain.connect(
+        audioContext.destination
+    );
+
+
+    oscillator.start();
+
+
+    oscillator.stop(
+        audioContext.currentTime
+        + duration
+    );
+
+}
+
+
+
+function playMelody() {
+
+
+    if (!musicPlaying)
+        return;
+
+
+    notes.forEach(
+        (note, index) => {
+
+            setTimeout(
+                () => {
+
+                    if (
+                        musicPlaying
+                    ) {
+
+                        playNote(
+                            note,
+                            .6
+                        );
+
+                    }
+
+                },
+                index * 650
+            );
+
+        }
+    );
+
+
+    musicTimer =
+    setTimeout(
+        playMelody,
+        notes.length * 650
+    );
+
+}
+
+
+
+function startMusic() {
+
+
+    if (!audioContext) {
+
+        audioContext =
+        new (
+            window.AudioContext ||
+            window.webkitAudioContext
+        )();
+
+    }
+
+
+    musicPlaying = true;
+
+
+    document.getElementById(
+        "musicButton"
+    ).textContent =
+    "🎵 Music ON";
+
+
+    playMelody();
+
+}
+
+
+
+const musicButton =
+document.getElementById(
+    "musicButton"
+);
+
+
+musicButton.addEventListener(
+    "click",
+    function(event) {
+
+
+        event.stopPropagation();
+
+
+        if (!audioContext) {
+
+            audioContext =
+            new (
+                window.AudioContext ||
+                window.webkitAudioContext
+            )();
+
+        }
+
+
+        if (
+            musicPlaying
+        ) {
+
+            musicPlaying =
+            false;
+
+
+            clearTimeout(
+                musicTimer
+            );
+
+
+            musicButton.textContent =
+            "🎵 Music OFF";
+
+        }
+
+        else {
+
+            musicPlaying =
+            true;
+
+
+            musicButton.textContent =
+            "🎵 Music ON";
+
+
+            playMelody();
+
+        }
+
+    }
+);
+
+</script>
+
+</body>
+
+</html>
